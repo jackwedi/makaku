@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3865204032579778957}
   - component: {fileID: 4602265907934020640}
   - component: {fileID: 3402460729520166054}
-  m_Layer: 12
+  m_Layer: 16
   m_Name: Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -155,8 +155,6 @@ MonoBehaviour:
   speed: 150
   jumpForce: 6
   jumpReset: 0.6
-  particles: {fileID: 8656096051885593794, guid: 091adb4ccedb3b5428273a051770475a,
-    type: 3}
 --- !u!114 &3402460729520166054
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
-{
+public class Enemy : MonoBehaviour {
     private float speed = 150f;
     private float jumpForce = 6.0f;
     private float jumpReset = .6f;
@@ -25,8 +24,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private GameObject particles;
 
-    private void Start()
-    {
+    private void Start() {
         _body = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _box = GetComponent<BoxCollider2D>();
@@ -41,34 +39,28 @@ public class Enemy : MonoBehaviour
 
     }
 
-    private void Update()
-    {
+    private void Update() {
         this.direction = _npc.Direction();
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(direction, 0f), 2f, layerMask);
-        if (hit && hit.collider.CompareTag("Player") && dashingAvailable)
-        {
+        if (hit && hit.collider.CompareTag("Player") && dashingAvailable) {
             StartCoroutine(Dash());
-
         }
 
         hit = Physics2D.Raycast(transform.position, new Vector2(direction, 0f), .5f, layerMask);
-        if (hit && hit.collider.CompareTag("Player"))
-        {
+        if (hit && hit.collider.CompareTag("Player")) {
             direction = -direction;
         }
 
         hit = Physics2D.Raycast(transform.position, Vector2.up, .5f, layerMask);
-        if (hit && hit.collider.CompareTag("Player"))
-        {
-            Debug.Log(hit.collider.name);
+        if (hit && hit.collider.CompareTag("Player")) {
+            Debug.Log("HURT" + hit.collider.name);
             Hurt();
         }
         
     }
 
-    public IEnumerator Dash()
-    {
+    public IEnumerator Dash() {
         hurtable = false;
         _body.gravityScale = 0;
         GameObject effect = Instantiate(particles, transform.position, Quaternion.identity);
@@ -76,56 +68,49 @@ public class Enemy : MonoBehaviour
 
         dashingAvailable = false;
 
-        while (current > 0)
-        {
+        while (current > 0) {
             current -= Time.deltaTime * 100;
             _body.velocity = new Vector2(transform.localScale.x, 0f) * 10;
             yield return null;
         }
+
         _body.gravityScale = 1;
 
         StartCoroutine(DashTimer());
     }
 
-    private IEnumerator DashTimer()
-    {
+    private IEnumerator DashTimer() {
 
         float time = 0;
         hurtable = true;
-        while (time < dashingDelay)
-        {
+        while (time < dashingDelay) {
             yield return new WaitForSeconds(1);
             time += 1;
         }
         dashingAvailable = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Jump")) _body.velocity = Vector2.up * jumpForce * 1.5f;
+    private void OnTriggerEnter2D(Collider2D collision) {
+        //if (collision.CompareTag("Jump")) _body.velocity = Vector2.up * jumpForce * 1.5f;
     }
 
-    public void Hurt()
-    {
-        if (hurtable)
-        {
+    public void Hurt() {
+        if (hurtable) {
             // ADD Animation
-            Messenger.Broadcast(GameEvent.ENEMY_KILLED);
+            Debug.Log("Killed", this.gameObject);
+            //Messenger.Broadcast(GameEvent.ENEMY_KILLED);
             Destroy(gameObject);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
+    private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Player")) direction = -direction;
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
+    private void OnCollisionStay2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("Player")) {
             direction = -direction;
-            _body.velocity = Vector2.up * jumpForce;
+            //_body.velocity = Vector2.up * jumpForce;
         }
     }
 }

@@ -11,6 +11,7 @@ TagManager:
   - Platform
   - Baby
   - Mega Jumps
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -28,8 +29,8 @@ TagManager:
   - Baby 2
   - Nest
   - Nest Limits
-  - 
-  - 
+  - Enemy
+  - Enemy Limits
   - 
   - 
   - 
