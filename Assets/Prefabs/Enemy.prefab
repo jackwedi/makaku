@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3865204032579778957}
   - component: {fileID: 4602265907934020640}
   - component: {fileID: 3402460729520166054}
+  - component: {fileID: 2204319075870298304}
   m_Layer: 16
   m_Name: Enemy
   m_TagString: Enemy
@@ -114,7 +115,7 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 3865204032579778956}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 357395784ebfa50419d1dca81d12b0f5, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -152,8 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6713b138275a44392bf285b5c77fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 150
-  jumpForce: 6
+  speed: 100
+  jumpForce: 2
   jumpReset: 0.6
 --- !u!114 &3402460729520166054
 MonoBehaviour:
@@ -169,3 +170,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   particles: {fileID: 8656096051885593794, guid: 091adb4ccedb3b5428273a051770475a,
     type: 3}
+--- !u!61 &2204319075870298304
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3865204032579778956}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.06, y: 0.53}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.07, y: 0.09}
+  m_EdgeRadius: 0

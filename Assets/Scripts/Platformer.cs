@@ -42,7 +42,7 @@ public class Platformer : MonoBehaviour
         layerMaskGrounded = (1 << LayerMask.NameToLayer("Terrain")) | (1 << LayerMask.NameToLayer("Platform"));
         layerMaskGripping = (1 << LayerMask.NameToLayer("Terrain"));
         
-        Manager.Player.SetPlayer(this.gameObject);
+        //Manager.Player.SetPlayer(this.gameObject);
     }
 
     private void Update() {
@@ -133,7 +133,6 @@ public class Platformer : MonoBehaviour
         //_body.gravityScale = 1;
         isDashing = false;
         StartCoroutine(DashTimer());
-
     }
 
     private IEnumerator DashTimer() {
@@ -149,6 +148,24 @@ public class Platformer : MonoBehaviour
 
         Messenger<float, float>.Broadcast(GameEvent.DASH_DELAY_UPDATED, time, dashingDelay);
         dashingAvailable = true;
+    }
+
+    public IEnumerator Hurt(Transform enemyTransform) {
+    
+        _body.gravityScale = 0;
+        _body.velocity = Vector2.zero;
+
+        float current = dashLength;
+
+        bool forward = Physics2D.Raycast(transform.position, new Vector2(transform.localScale.x , transform.localScale.y), jumpReset / 2, (1 << LayerMask.NameToLayer("Enemy")));
+
+        float direction = forward ? -1f : 1f;
+        
+        while (current > 0) {
+            current -= Time.deltaTime * 100;
+            _body.velocity = new Vector2( direction * 15 * transform.localScale.x, _body.velocity.y);
+            yield return null;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -169,10 +186,14 @@ public class Platformer : MonoBehaviour
         if (collision.gameObject.CompareTag("Spike")) {
             Manager.Player.Hurt(1);
             //Manager.Player.RespawnAtCheckPoint();
+        } else if (collision.gameObject.CompareTag("Enemy")) {
+            Debug.Log("OUCH");
+            StartCoroutine(Hurt(collision.gameObject.transform));
         }
     }
 
     private void OnDrawGizmos() {
         Gizmos.DrawRay(transform.position, Vector2.down * jumpReset);
     }
+    
 }

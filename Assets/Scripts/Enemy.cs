@@ -52,11 +52,11 @@ public class Enemy : MonoBehaviour {
             direction = -direction;
         }
 
-        hit = Physics2D.Raycast(transform.position, Vector2.up, .5f, layerMask);
+        /**hit = Physics2D.Raycast(transform.position, Vector2.up, .5f, layerMask);
         if (hit && hit.collider.CompareTag("Player")) {
             Debug.Log("HURT" + hit.collider.name);
             Hurt();
-        }
+        }**/
         
     }
 
@@ -91,7 +91,12 @@ public class Enemy : MonoBehaviour {
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        //if (collision.CompareTag("Jump")) _body.velocity = Vector2.up * jumpForce * 1.5f;
+        
+        if (collision.CompareTag("Player")) {
+            Debug.Log(" ENMY OUCH");
+            //Debug.Log("HURT" + hit.collider.name);
+            Hurt();
+        }
     }
 
     public void Hurt() {
