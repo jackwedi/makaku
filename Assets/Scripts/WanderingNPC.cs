@@ -66,7 +66,7 @@ public class WanderingNPC : MonoBehaviour
         //this.layerRaycastMask = ~this.layerRaycastMask;
     }
 
-    private void ChangeDirection() {
+    public void ChangeDirection() {
         direction = Random.Range(-1, 1);
         direction = Mathf.Sign(direction);
     }

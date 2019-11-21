@@ -29,7 +29,8 @@ public class Platformer : MonoBehaviour
     [SerializeField] private GameObject particles;
 
 
-    private void Start() {
+    private void Start()
+    {
         _body = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _box = GetComponent<BoxCollider2D>();
@@ -41,14 +42,16 @@ public class Platformer : MonoBehaviour
 
         layerMaskGrounded = (1 << LayerMask.NameToLayer("Terrain")) | (1 << LayerMask.NameToLayer("Platform"));
         layerMaskGripping = (1 << LayerMask.NameToLayer("Terrain"));
-        
+
         //Manager.Player.SetPlayer(this.gameObject);
     }
 
-    private void Update() {
+    private void Update()
+    {
         deltaX = 0.0f;
 
-        if (handleKeyInput) {
+        if (handleKeyInput)
+        {
             // Speed movement
             deltaX = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
             Vector2 movement = new Vector2(deltaX, _body.velocity.y);
@@ -61,60 +64,71 @@ public class Platformer : MonoBehaviour
         _anim.SetBool("grounded", isGrounded);
 
         // Flips the sprite depending on the sign of deltaX
-        if (!Mathf.Approximately(deltaX, 0)) {
+        if (!Mathf.Approximately(deltaX, 0))
+        {
             transform.localScale = new Vector3(Mathf.Sign(deltaX), 1, 1);
         }
-    
-        isGripping = Physics2D.Raycast(transform.position, new Vector2(transform.localScale.x , transform.localScale.y), jumpReset / 2, layerMaskGripping) && ! Physics2D.Raycast(transform.position, Vector2.down, jumpReset * 2, layerMaskGrounded);
-        
+
+        isGripping = Physics2D.Raycast(transform.position, new Vector2(transform.localScale.x, transform.localScale.y), jumpReset / 2, layerMaskGripping) && !Physics2D.Raycast(transform.position, Vector2.down, jumpReset * 2, layerMaskGrounded);
+
         //bool rayForward = Physics2D.Raycast(transform.position, new Vector2(transform.localScale.x , transform.localScale.y), jumpReset / 2, layerMaskGripping);
         //bool rayDownard = Physics2D.Raycast(transform.position, Vector2.down, jumpReset * 2, layerMaskGrounded);
         //isGripping = rayDownard && !rayDownard;
 
-        if (isGripping) {
+        if (isGripping)
+        {
             _body.gravityScale = 0;
             _body.velocity = Vector2.zero;
-        } else if (!isGripping && !isDashing) {
+        }
+        else if (!isGripping && !isDashing)
+        {
             _body.gravityScale = 1;
         }
-        
-        if (Input.GetKeyDown(KeyCode.Space) && isGripping) {
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGripping)
+        {
             StartCoroutine(WallJump());
-        } 
+        }
 
 
         //Input of jumping handling 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) {
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        {
             _body.velocity = Vector2.up * jumpForce;
-        } 
+        }
 
         // Input of dashing handling
-        if (Input.GetKeyDown(KeyCode.W) && !isDashing && dashingAvailable) {
+        if (Input.GetKeyDown(KeyCode.W) && !isDashing && dashingAvailable)
+        {
             StartCoroutine(Dash());
         }
     }
 
-    public IEnumerator WallJump() {
-        if (!isWallJumping) {
+    public IEnumerator WallJump()
+    {
+        if (!isWallJumping)
+        {
             isWallJumping = true;
             handleKeyInput = false;
-            _body.velocity =  new Vector2(-transform.localScale.x * 1.5f, .8f) * jumpForce;
+            _body.velocity = new Vector2(-transform.localScale.x * 1.5f, .8f) * jumpForce;
             // Switch the sprite
-            transform.localScale = new Vector3(- transform.localScale.x, 1, 1);
-            float current = dashLength ;
-            while (current > 0) {
+            transform.localScale = new Vector3(-transform.localScale.x, 1, 1);
+            float current = dashLength;
+            while (current > 0)
+            {
                 current -= Time.deltaTime * 100;
                 yield return null;
             }
-            
+
             handleKeyInput = true;
             _body.velocity = new Vector2(0, 0);
             isWallJumping = false;
         }
     }
 
-    public IEnumerator Dash() {
-    
+    public IEnumerator Dash()
+    {
+
         _body.gravityScale = 0;
         _body.velocity = Vector2.zero;
 
@@ -124,7 +138,8 @@ public class Platformer : MonoBehaviour
         isDashing = true;
         dashingAvailable = false;
 
-        while (current > 0) {
+        while (current > 0)
+        {
             current -= Time.deltaTime * 100;
             _body.velocity = new Vector2(transform.localScale.x * 10, _body.velocity.y);
             yield return null;
@@ -135,12 +150,14 @@ public class Platformer : MonoBehaviour
         StartCoroutine(DashTimer());
     }
 
-    private IEnumerator DashTimer() {
+    private IEnumerator DashTimer()
+    {
 
         float time = 0;
         Messenger<float, float>.Broadcast(GameEvent.DASH_DELAY_UPDATED, time, dashingDelay);
 
-        while (time < dashingDelay) {
+        while (time < dashingDelay)
+        {
             yield return new WaitForSeconds(1);
             time += 1;
             Messenger<float, float>.Broadcast(GameEvent.DASH_DELAY_UPDATED, time, dashingDelay);
@@ -150,50 +167,62 @@ public class Platformer : MonoBehaviour
         dashingAvailable = true;
     }
 
-    public IEnumerator Hurt(Transform enemyTransform) {
-    
+    public IEnumerator Hurt(Transform enemyTransform)
+    {
+
         _body.gravityScale = 0;
         _body.velocity = Vector2.zero;
 
         float current = dashLength;
 
-        bool forward = Physics2D.Raycast(transform.position, new Vector2(transform.localScale.x , transform.localScale.y), jumpReset / 2, (1 << LayerMask.NameToLayer("Enemy")));
+        bool forward = Physics2D.Raycast(transform.position, new Vector2(transform.localScale.x, transform.localScale.y), jumpReset / 2, (1 << LayerMask.NameToLayer("Enemy")));
 
         float direction = forward ? -1f : 1f;
-        
-        while (current > 0) {
+
+        while (current > 0)
+        {
             current -= Time.deltaTime * 100;
-            _body.velocity = new Vector2( direction * 15 * transform.localScale.x, _body.velocity.y);
+            _body.velocity = new Vector2(direction * 15 * transform.localScale.x, _body.velocity.y);
             yield return null;
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
 
-        if (collision.CompareTag("Jumps")) {
+        if (collision.CompareTag("Jumps"))
+        {
             _body.gravityScale = 1;
             _body.velocity = Vector2.up * jumpForce;
-        } else if (collision.CompareTag("Check Point")) {
+        }
+        else if (collision.CompareTag("Check Point"))
+        {
             Manager.Progress.SetCheckPoint(collision.gameObject.transform);
-        } else if (collision.CompareTag("Mega Jumps")) {
+        }
+        else if (collision.CompareTag("Mega Jumps"))
+        {
             _body.gravityScale = 1;
             _body.velocity = Vector2.up * jumpForce * this.megaJumpRatio;
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
-
-        if (collision.gameObject.CompareTag("Spike")) {
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Spike"))
+        {
             Manager.Player.Hurt(1);
             //Manager.Player.RespawnAtCheckPoint();
-        } else if (collision.gameObject.CompareTag("Enemy")) {
+        }
+        else if (collision.gameObject.CompareTag("Enemy"))
+        {
             Debug.Log("OUCH");
             StartCoroutine(Hurt(collision.gameObject.transform));
         }
     }
 
-    private void OnDrawGizmos() {
+    private void OnDrawGizmos()
+    {
         Gizmos.DrawRay(transform.position, Vector2.down * jumpReset);
     }
-    
+
 }

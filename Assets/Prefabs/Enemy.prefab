@@ -153,8 +153,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d6713b138275a44392bf285b5c77fba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 100
-  jumpForce: 2
+  speed: 125
+  jumpForce: 5
   jumpReset: 0.6
 --- !u!114 &3402460729520166054
 MonoBehaviour:
@@ -194,5 +194,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.07, y: 0.09}
+  m_Size: {x: 0.16, y: 0.06}
   m_EdgeRadius: 0

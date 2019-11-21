@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour {
+public class Enemy : MonoBehaviour
+{
     private float speed = 150f;
-    private float jumpForce = 6.0f;
+    private float jumpForce = 10.0f;
     private float jumpReset = .6f;
 
     private float dashLength = 20f;
@@ -24,7 +25,8 @@ public class Enemy : MonoBehaviour {
 
     [SerializeField] private GameObject particles;
 
-    private void Start() {
+    private void Start()
+    {
         _body = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _box = GetComponent<BoxCollider2D>();
@@ -34,33 +36,46 @@ public class Enemy : MonoBehaviour {
         this.jumpForce = _npc.JumpForce();
         this.jumpReset = _npc.JumpReset();
         this.direction = _npc.Direction();
-        layerMask = (1 << LayerMask.NameToLayer("Enemy")) | (1 << LayerMask.NameToLayer("Ignore Raycast"));
-        layerMask = ~layerMask;
+        layerMask = (1 << LayerMask.NameToLayer("Player"));
 
+        StartCoroutine("RandomJump");
     }
 
-    private void Update() {
+    private void Update()
+    {
         this.direction = _npc.Direction();
 
         RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(direction, 0f), 2f, layerMask);
-        if (hit && hit.collider.CompareTag("Player") && dashingAvailable) {
+        if (hit && hit.collider.CompareTag("Player") && dashingAvailable)
+        {
             StartCoroutine(Dash());
         }
 
-        hit = Physics2D.Raycast(transform.position, new Vector2(direction, 0f), .5f, layerMask);
-        if (hit && hit.collider.CompareTag("Player")) {
-            direction = -direction;
+        hit = Physics2D.Raycast(transform.position, new Vector2(direction, 0f), .1f, layerMask);
+        if (hit && hit.collider.CompareTag("Player"))
+        {
+            _npc.ChangeDirection();
         }
 
-        /**hit = Physics2D.Raycast(transform.position, Vector2.up, .5f, layerMask);
-        if (hit && hit.collider.CompareTag("Player")) {
-            Debug.Log("HURT" + hit.collider.name);
-            Hurt();
-        }**/
-        
     }
 
-    public IEnumerator Dash() {
+    public IEnumerator RandomJump()
+    {
+        for (; ; )
+        {
+            float rdTime = Random.Range(5f, 10f);
+            float rd = Random.Range(0f, 1f);
+            if (rd > 0.75f)
+            {
+                _npc.ChangeDirection();
+                _body.velocity = Vector2.up * jumpForce;
+            }
+            yield return new WaitForSeconds(rdTime);
+        }
+    }
+
+    public IEnumerator Dash()
+    {
         hurtable = false;
         _body.gravityScale = 0;
         GameObject effect = Instantiate(particles, transform.position, Quaternion.identity);
@@ -68,7 +83,8 @@ public class Enemy : MonoBehaviour {
 
         dashingAvailable = false;
 
-        while (current > 0) {
+        while (current > 0)
+        {
             current -= Time.deltaTime * 100;
             _body.velocity = new Vector2(transform.localScale.x, 0f) * 10;
             yield return null;
@@ -79,43 +95,48 @@ public class Enemy : MonoBehaviour {
         StartCoroutine(DashTimer());
     }
 
-    private IEnumerator DashTimer() {
+    private IEnumerator DashTimer()
+    {
 
         float time = 0;
         hurtable = true;
-        while (time < dashingDelay) {
+        while (time < dashingDelay)
+        {
             yield return new WaitForSeconds(1);
             time += 1;
         }
         dashingAvailable = true;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        
-        if (collision.CompareTag("Player")) {
-            Debug.Log(" ENMY OUCH");
-            //Debug.Log("HURT" + hit.collider.name);
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.CompareTag("Player"))
+        {
             Hurt();
         }
     }
 
-    public void Hurt() {
-        if (hurtable) {
+    public void Hurt()
+    {
+        if (hurtable)
+        {
             // ADD Animation
-            Debug.Log("Killed", this.gameObject);
             //Messenger.Broadcast(GameEvent.ENEMY_KILLED);
             Destroy(gameObject);
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) {
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         if (collision.gameObject.CompareTag("Player")) direction = -direction;
     }
 
-    private void OnCollisionStay2D(Collision2D collision) {
-        if (collision.gameObject.CompareTag("Player")) {
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
             direction = -direction;
-            //_body.velocity = Vector2.up * jumpForce;
         }
     }
 }
