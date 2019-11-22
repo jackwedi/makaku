@@ -12,6 +12,7 @@ TagManager:
   - Baby
   - Mega Jumps
   - Enemy
+  - Enemy Limits
   layers:
   - Default
   - TransparentFX

@@ -36,7 +36,7 @@ public class Enemy : MonoBehaviour
         this.jumpForce = _npc.JumpForce();
         this.jumpReset = _npc.JumpReset();
         this.direction = _npc.Direction();
-        layerMask = (1 << LayerMask.NameToLayer("Player"));
+        layerMask = (1 << LayerMask.NameToLayer("Player")) | (1 << LayerMask.NameToLayer("Enemy Limits"));
 
         StartCoroutine("RandomJump");
     }
@@ -51,8 +51,10 @@ public class Enemy : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-        hit = Physics2D.Raycast(transform.position, new Vector2(direction, 0f), .1f, layerMask);
-        if (hit && hit.collider.CompareTag("Player"))
+        hit = Physics2D.Raycast(transform.position, new Vector2(direction, 0f), 0.5f, layerMask);
+        Debug.Log("TEST" + hit.ToString());
+
+        if (hit && (hit.collider.CompareTag("Player") || hit.collider.CompareTag("Enemy Limits")))
         {
             _npc.ChangeDirection();
         }

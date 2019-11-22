@@ -22,40 +22,49 @@ public class WanderingNPC : MonoBehaviour
 
     private int layerRaycastMask = 0;
 
-    public float Speed() {
+    public float Speed()
+    {
         return this.speed;
     }
 
-    public float JumpForce() {
+    public float JumpForce()
+    {
         return this.jumpForce;
     }
 
-    public float JumpReset() {
+    public float JumpReset()
+    {
         return this.jumpForce;
     }
 
-    public float Direction() {
+    public float Direction()
+    {
         return this.direction;
     }
 
-    public void setWandering(bool param) {
+    public void setWandering(bool param)
+    {
         this._wandering = param;
     }
 
-    public int getLayerMask() {
+    public int getLayerMask()
+    {
         return this.layerRaycastMask;
     }
 
-    public void setLayerMask(int mask) {
+    public void setLayerMask(int mask)
+    {
         this.layerRaycastMask = mask;
     }
 
-    public void setSpeed(float p_speed) {
+    public void setSpeed(float p_speed)
+    {
         this.speed = p_speed;
     }
 
 
-    private void Start() {
+    private void Start()
+    {
         _body = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _box = GetComponent<BoxCollider2D>();
@@ -63,15 +72,16 @@ public class WanderingNPC : MonoBehaviour
         //InvokeRepeating("ChangeDirection", 0f, 2f);
 
         this.layerRaycastMask = (1 << LayerMask.NameToLayer("Terrain"));
-        //this.layerRaycastMask = ~this.layerRaycastMask;
     }
 
-    public void ChangeDirection() {
+    public void ChangeDirection()
+    {
         direction = Random.Range(-1, 1);
         direction = Mathf.Sign(direction);
     }
 
-    private void Update() {
+    private void Update()
+    {
 
         if (!this._wandering) return;
 
@@ -85,38 +95,45 @@ public class WanderingNPC : MonoBehaviour
         _anim.SetBool("grounded", isGrounded);
 
         RaycastHit2D wall = Physics2D.Raycast(transform.position, new Vector2(direction, 0), jumpReset, this.layerRaycastMask);
-        if (wall) {
+        if (wall)
+        {
             direction = -direction;
         }
 
         // Flips the sprite dependind on the sign of deltaX
-        if (!Mathf.Approximately(deltaX, 0)) {
+        if (!Mathf.Approximately(deltaX, 0))
+        {
             transform.localScale = new Vector3(Mathf.Sign(deltaX), 1, 1);
         }
-        
+
         jumpTimer -= Time.deltaTime;
 
-        if (jumpTimer < 0f && isGrounded) {
+        if (jumpTimer < 0f && isGrounded)
+        {
 
             _body.velocity = Vector2.up * jumpForce;
             jumpTimer = Random.Range(2f, 5f);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
 
-        if (collision.CompareTag("Jumps")) {
-             _body.velocity = Vector2.up * jumpForce * 1.5f;
+        if (collision.CompareTag("Jumps"))
+        {
+            _body.velocity = Vector2.up * jumpForce * 1.5f;
         }
     }
 
 
-    public void setAnimBool(string animationLabel, bool param) {   
+    public void setAnimBool(string animationLabel, bool param)
+    {
         _anim.SetBool(animationLabel, param);
     }
 
-    private void OnDrawGizmos() {
-        Gizmos.DrawRay(transform.position, new Vector2(direction, 0)* jumpReset);
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawRay(transform.position, new Vector2(direction, 0) * jumpReset);
     }
- 
+
 }
