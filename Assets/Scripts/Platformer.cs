@@ -74,7 +74,6 @@ public class Platformer : MonoBehaviour
         //bool rayForward = Physics2D.Raycast(transform.position, new Vector2(transform.localScale.x , transform.localScale.y), jumpReset / 2, layerMaskGripping);
         //bool rayDownard = Physics2D.Raycast(transform.position, Vector2.down, jumpReset * 2, layerMaskGrounded);
         //isGripping = rayDownard && !rayDownard;
-
         if (isGripping)
         {
             _body.gravityScale = 0;

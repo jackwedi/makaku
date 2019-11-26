@@ -51,10 +51,9 @@ public class Enemy : MonoBehaviour
             StartCoroutine(Dash());
         }
 
-        hit = Physics2D.Raycast(transform.position, new Vector2(direction, 0f), 0.5f, layerMask);
-        Debug.Log("TEST" + hit.ToString());
+        hit = Physics2D.Raycast(transform.position, new Vector2(direction, 0f), 0.25f, layerMask);
 
-        if (hit && (hit.collider.CompareTag("Player") || hit.collider.CompareTag("Enemy Limits")))
+        if (hit && hit.collider.CompareTag("Enemy Limits"))
         {
             _npc.ChangeDirection();
         }
@@ -131,7 +130,14 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player")) direction = -direction;
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            bool hit = Physics2D.Raycast(transform.position, new Vector2(direction, 0f), 0.25f, layerMask);
+            if (hit)
+            {
+                direction = -direction;
+            }
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
