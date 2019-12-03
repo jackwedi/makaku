@@ -31,6 +31,8 @@ public class Platformer : MonoBehaviour
 
     private void Start()
     {
+        Manager.Progress.SetCheckPoint(this.transform);
+        Manager.Player.SetPlayer(this.gameObject);
         _body = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
         _box = GetComponent<BoxCollider2D>();
@@ -196,6 +198,7 @@ public class Platformer : MonoBehaviour
         }
         else if (collision.CompareTag("Check Point"))
         {
+            Debug.Log("NEW CHECK POINT");
             Manager.Progress.SetCheckPoint(collision.gameObject.transform);
         }
         else if (collision.CompareTag("Mega Jumps"))
@@ -209,8 +212,8 @@ public class Platformer : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Spike"))
         {
-            Manager.Player.Hurt(1);
-            //Manager.Player.RespawnAtCheckPoint();
+            //Manager.Player.Hurt(1);
+            Manager.Player.RespawnAtCheckPoint();
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {

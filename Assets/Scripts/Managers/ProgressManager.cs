@@ -6,7 +6,7 @@ public class ProgressManager : MonoBehaviour, IGameManager
 {
     public ManagerStatus status { get; private set; }
 
-    private int currentLevel;
+    [SerializeField] private int currentLevel;
     public int countDown { get; private set; }
     private string currentSeason;
 
@@ -19,20 +19,14 @@ public class ProgressManager : MonoBehaviour, IGameManager
         status = ManagerStatus.Initialized;
 
         //Load FROM SAVE state
-        currentLevel = 1;
+        //currentLevel = 1;
 
         status = ManagerStatus.Started;
     }
 
     public void NextSeason()
     {
-        if (_initLevel != null) 
-        {
-            SceneManager.LoadScene(_initLevel);
-            return;
-        }
-        
-        if(SceneManager.GetActiveScene().name != "Main Menu") currentLevel += 1;
+        if (SceneManager.GetActiveScene().name != "Main Menu") currentLevel += 1;
         string nextLevel = "Level " + currentLevel.ToString();
         SceneManager.LoadScene(nextLevel);
     }
@@ -47,6 +41,11 @@ public class ProgressManager : MonoBehaviour, IGameManager
     public void UpdateLevel(int level)
     {
         currentLevel = level;
+    }
+
+    public int getLevel()
+    {
+        return this.currentLevel;
     }
 
     public void SetCountDown(int time)
@@ -66,6 +65,7 @@ public class ProgressManager : MonoBehaviour, IGameManager
 
     public Transform GetCheckPoint()
     {
+        Debug.Log(this.checkpoint);
         return this.checkpoint;
     }
 
