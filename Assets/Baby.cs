@@ -10,10 +10,10 @@ public class Baby : MonoBehaviour
     private WanderingNPC _npc = null;
     private string _layer;
 
-    [SerializeField] private BabyLayers _layerType;
+    [SerializeField] private BabyLayers _layerType = BabyLayers.Baby1;
     [SerializeField] private bool _captured = false;
     [SerializeField] private bool _secured = false;
-    [SerializeField] private Vector3 _securedPosition;
+    [SerializeField] private Vector3 _securedPosition = Vector3.zero;
     [SerializeField] private float _calmSpeedRatio = 0.5f;
     public enum BabyLayers
     {

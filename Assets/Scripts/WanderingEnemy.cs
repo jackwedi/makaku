@@ -9,7 +9,7 @@ public class WanderingEnemy : MonoBehaviour
     [SerializeField] private float jumpReset = .1f;
 
     [SerializeField] private float dashLength = .01f;
-    [SerializeField] private float dashingDelay;
+    [SerializeField] private float dashingDelay = 0.0f;
     private bool dashingAvailable = true;
 
     private Rigidbody2D _body;
@@ -24,7 +24,7 @@ public class WanderingEnemy : MonoBehaviour
 
     private float direction = -1;
 
-    [SerializeField] private GameObject particles;
+    [SerializeField] private GameObject particles = null;
 
 
     private void Start()
@@ -51,7 +51,7 @@ public class WanderingEnemy : MonoBehaviour
         // Speed movement
 
 
-        float deltaX = direction *speed * Time.deltaTime;
+        float deltaX = direction * speed * Time.deltaTime;
         Vector2 movement = new Vector2(deltaX, _body.velocity.y);
         _body.velocity = movement;
         _anim.SetFloat("speed", Mathf.Abs(deltaX));
@@ -62,7 +62,7 @@ public class WanderingEnemy : MonoBehaviour
         // Flips the sprite dependind on the sign of deltaX
         if (!Mathf.Approximately(deltaX, 0)) transform.localScale = new Vector3(Mathf.Sign(deltaX), 1, 1);
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(direction,0f), 2f, layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(direction, 0f), 2f, layerMask);
         if (hit && hit.collider.CompareTag("Player") && dashingAvailable)
         {
             StartCoroutine(Dash());
@@ -87,7 +87,7 @@ public class WanderingEnemy : MonoBehaviour
         if (jumpTimer < 0f && isGrounded)
         {
             _body.velocity = Vector2.up * jumpForce;
-            jumpTimer = Random.Range(2f,5f);
+            jumpTimer = Random.Range(2f, 5f);
         }
     }
 
@@ -132,7 +132,7 @@ public class WanderingEnemy : MonoBehaviour
 
     public void Hurt()
     {
-        if(hurtable)
+        if (hurtable)
         {
             // ADD Animation
             Messenger.Broadcast(GameEvent.ENEMY_KILLED);

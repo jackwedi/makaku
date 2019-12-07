@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Jump : MonoBehaviour
 {
-    [SerializeField] private UnityEngine.Sprite _jumpON;
-    [SerializeField] private UnityEngine.Sprite _jumpON2;
-    [SerializeField] private UnityEngine.Sprite _jumpOFF;
+    [SerializeField] private UnityEngine.Sprite _jumpON = null;
+    [SerializeField] private UnityEngine.Sprite _jumpON2 = null;
+    [SerializeField] private UnityEngine.Sprite _jumpOFF = null;
 
     private SpriteRenderer _renderer;
     private Collider2D _collider;

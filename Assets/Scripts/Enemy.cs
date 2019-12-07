@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
 
     private float direction = -1;
 
-    [SerializeField] private GameObject particles;
+    [SerializeField] private GameObject particles = null;
 
     private void Start()
     {

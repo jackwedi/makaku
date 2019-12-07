@@ -12,8 +12,6 @@ public class ProgressManager : MonoBehaviour, IGameManager
 
     private Vector3 checkpoint;
 
-    [SerializeField] private string _initLevel = null;
-
     public void Startup()
     {
         status = ManagerStatus.Initialized;
@@ -33,9 +31,7 @@ public class ProgressManager : MonoBehaviour, IGameManager
 
     public void RestartLevel()
     {
-        Debug.Log(SceneManager.GetActiveScene().name);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        Manager.Player.ResetHealth();
     }
 
     public void UpdateLevel(int level)

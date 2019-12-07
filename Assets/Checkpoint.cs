@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Checkpoint : MonoBehaviour
 {
-    [SerializeField] private UnityEngine.SpriteRenderer _treeLeaves;
+    [SerializeField] private UnityEngine.SpriteRenderer _treeLeaves = null;
     private void OnTriggerEnter2D(Collider2D other)
     {
         _treeLeaves.color = Color.white;

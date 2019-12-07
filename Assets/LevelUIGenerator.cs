@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class LevelUIGenerator : MonoBehaviour
 {
-    [SerializeField] private UnityEngine.UI.Button[] _buttons;
+    [SerializeField] private UnityEngine.UI.Button[] _buttons = null;
 
     // Start is called before the first frame update
     void Start()

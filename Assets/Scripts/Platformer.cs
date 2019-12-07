@@ -9,7 +9,7 @@ public class Platformer : MonoBehaviour
     [SerializeField] private float jumpReset = 10f;
 
     [SerializeField] private float dashLength = .01f;
-    [SerializeField] private float dashingDelay;
+    [SerializeField] private float dashingDelay = 0.0f;
     [SerializeField] private float megaJumpRatio = 1.5f;
     private bool isDashing = false;
     private bool dashingAvailable = true;
@@ -26,7 +26,7 @@ public class Platformer : MonoBehaviour
     [SerializeField] private bool isGrounded;
     [SerializeField] private bool isGripping;
 
-    [SerializeField] private GameObject particles;
+    [SerializeField] private GameObject particles = null;
 
 
     private void Start()
@@ -213,7 +213,6 @@ public class Platformer : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Spike"))
         {
-            //Manager.Player.Hurt(1);
             Manager.Player.RespawnAtCheckPoint();
         }
         else if (collision.gameObject.CompareTag("Enemy"))
