@@ -10,7 +10,7 @@ public class ProgressManager : MonoBehaviour, IGameManager
     public int countDown { get; private set; }
     private string currentSeason;
 
-    private Transform checkpoint;
+    private Vector3 checkpoint;
 
     [SerializeField] private string _initLevel = null;
 
@@ -60,12 +60,11 @@ public class ProgressManager : MonoBehaviour, IGameManager
 
     public void SetCheckPoint(Transform checkpointTransform)
     {
-        this.checkpoint = checkpointTransform;
+        this.checkpoint = checkpointTransform.position;
     }
 
-    public Transform GetCheckPoint()
+    public Vector3 GetCheckPoint()
     {
-        Debug.Log(this.checkpoint);
         return this.checkpoint;
     }
 

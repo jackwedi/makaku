@@ -46,7 +46,7 @@ public class PlayerManager : MonoBehaviour, IGameManager
     public void RespawnAtCheckPoint()
     {
         // ADD ANIM
-        _player.transform.position = Manager.Progress.GetCheckPoint().position;
+        _player.transform.position = Manager.Progress.GetCheckPoint();
     }
 
     public void SetPlayer(GameObject player)

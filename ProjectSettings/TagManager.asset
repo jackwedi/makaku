@@ -50,3 +50,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Spikes
+    uniqueID: 2952556079
+    locked: 0
+  - name: Terrain
+    uniqueID: 1322085245
+    locked: 0
+  - name: CheckPoints
+    uniqueID: 2387611285
+    locked: 0
+  - name: Jumps
+    uniqueID: 3937584489
+    locked: 0
+  - name: Player
+    uniqueID: 4428425
+    locked: 0
