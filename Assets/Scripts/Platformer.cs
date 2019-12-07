@@ -38,15 +38,9 @@ public class Platformer : MonoBehaviour
         _anim = GetComponent<Animator>();
         _box = GetComponent<BoxCollider2D>();
 
-        //layerMaskGrounded = (1 << LayerMask.NameToLayer("Player")) | (1 << LayerMask.NameToLayer("Ignore Raycast")) | (1 << LayerMask.NameToLayer("Baby"));
-        //layerMaskGripping = layerMaskGrounded | (1 << LayerMask.NameToLayer("Platform")) | (1 << LayerMask.NameToLayer("Nest"));
-        //layerMaskGrounded = ~layerMaskGrounded;
-        //layerMaskGripping = ~layerMaskGripping;
-
         layerMaskGrounded = (1 << LayerMask.NameToLayer("Terrain")) | (1 << LayerMask.NameToLayer("Platform"));
         layerMaskGripping = (1 << LayerMask.NameToLayer("Terrain"));
 
-        //Manager.Player.SetPlayer(this.gameObject);
     }
 
     private void Update()

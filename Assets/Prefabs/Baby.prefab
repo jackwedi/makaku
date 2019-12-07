@@ -164,10 +164,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1806142345443271607}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 645b08717d05171459619b1b57fba1c6, type: 3}
+  m_Script: {fileID: 11500000, guid: 60bd33377d1b87444aff9e9cd6c582ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _layerType: 0
   _captured: 0
   _secured: 0
   _securedPosition: {x: 0, y: 0, z: 0}
+  _calmSpeedRatio: 0.5

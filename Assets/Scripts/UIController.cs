@@ -35,4 +35,12 @@ public class UIController : MonoBehaviour
         // Create another animation on Death and set up the menu to either restart or quit
         Manager.Progress.RestartLevel();
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+
+        }
+    }
 }
