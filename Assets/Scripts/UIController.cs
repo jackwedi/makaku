@@ -40,7 +40,7 @@ public class UIController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-
+            Manager.Progress.Save();
         }
     }
 }

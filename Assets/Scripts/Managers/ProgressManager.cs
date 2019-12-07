@@ -64,4 +64,10 @@ public class ProgressManager : MonoBehaviour, IGameManager
         return this.checkpoint;
     }
 
+    public void Save()
+    {
+        //TODO SAVE the game
+        SceneManager.LoadScene("Main Menu");
+    }
+
 }
