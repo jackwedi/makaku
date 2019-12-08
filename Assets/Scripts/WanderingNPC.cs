@@ -133,7 +133,7 @@ public class WanderingNPC : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawRay(transform.position, new Vector2(direction, 0) * jumpReset);
+        Gizmos.DrawRay(transform.position, new Vector2(0.5f, 0));
     }
 
 }

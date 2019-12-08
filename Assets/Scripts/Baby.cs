@@ -15,6 +15,10 @@ public class Baby : MonoBehaviour
     [SerializeField] private bool _secured = false;
     [SerializeField] private Vector3 _securedPosition = Vector3.zero;
     [SerializeField] private float _calmSpeedRatio = 0.5f;
+    private float direction = -1;
+    private int layerMask;
+
+
     public enum BabyLayers
     {
         Baby1,
@@ -42,6 +46,8 @@ public class Baby : MonoBehaviour
                 this._layer = "Baby 2";
                 break;
         }
+
+        layerMask = (1 << LayerMask.NameToLayer("Player")) | (1 << LayerMask.NameToLayer("Baby Limits"));
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -59,12 +65,20 @@ public class Baby : MonoBehaviour
 
     private void Update()
     {
+        this.direction = _npc.Direction();
 
         if (_captured && !_secured)
         {
             this.transform.position = player.transform.position + new Vector3(0, .2f, 0);
             // Sets the baby behind the player
             this.transform.localScale = new Vector3(-player.transform.localScale.x, player.transform.localScale.y, player.transform.localScale.z);
+        }
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, new Vector2(direction, 0f), 0.5f, layerMask);
+
+        if (hit && hit.collider.CompareTag("Baby Limits"))
+        {
+            _npc.ChangeDirection();
         }
     }
 
@@ -73,9 +87,10 @@ public class Baby : MonoBehaviour
 
         this._secured = true;
         this.transform.position = this._securedPosition;
+        // Ignore
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Player"), LayerMask.NameToLayer(this._layer), true);
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Checkpoints"), LayerMask.NameToLayer(this._layer), true);
-
+        // Notice
         Physics2D.IgnoreLayerCollision(LayerMask.NameToLayer("Nest Limits"), LayerMask.NameToLayer(this._layer), false);
 
         this._collider.isTrigger = false;

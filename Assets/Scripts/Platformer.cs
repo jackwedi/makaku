@@ -19,15 +19,14 @@ public class Platformer : MonoBehaviour
 
     private Rigidbody2D _body;
     private Animator _anim;
-    private BoxCollider2D _box;
+    private CapsuleCollider2D _box;
 
     private int layerMaskGrounded;
     private int layerMaskGripping;
     [SerializeField] private bool isGrounded;
     [SerializeField] private bool isGripping;
-
-    [SerializeField] private GameObject particles = null;
-
+    [SerializeField] private GameObject _dashParticles = null;
+    [SerializeField] private GameObject _deathParticles = null;
 
     private void Start()
     {
@@ -36,7 +35,7 @@ public class Platformer : MonoBehaviour
 
         _body = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();
-        _box = GetComponent<BoxCollider2D>();
+        _box = GetComponent<CapsuleCollider2D>();
 
         layerMaskGrounded = (1 << LayerMask.NameToLayer("Terrain")) | (1 << LayerMask.NameToLayer("Platform"));
         layerMaskGripping = (1 << LayerMask.NameToLayer("Terrain"));
@@ -68,9 +67,6 @@ public class Platformer : MonoBehaviour
 
         isGripping = Physics2D.Raycast(transform.position, new Vector2(transform.localScale.x, transform.localScale.y), jumpReset / 2, layerMaskGripping) && !Physics2D.Raycast(transform.position, Vector2.down, jumpReset * 2, layerMaskGrounded);
 
-        //bool rayForward = Physics2D.Raycast(transform.position, new Vector2(transform.localScale.x , transform.localScale.y), jumpReset / 2, layerMaskGripping);
-        //bool rayDownard = Physics2D.Raycast(transform.position, Vector2.down, jumpReset * 2, layerMaskGrounded);
-        //isGripping = rayDownard && !rayDownard;
         if (isGripping)
         {
             _body.gravityScale = 0;
@@ -128,7 +124,7 @@ public class Platformer : MonoBehaviour
         _body.gravityScale = 0;
         _body.velocity = Vector2.zero;
 
-        GameObject effect = Instantiate(particles, transform.position, Quaternion.identity);
+        GameObject effect = Instantiate(_dashParticles, transform.position, Quaternion.identity);
         float current = dashLength;
 
         isDashing = true;
@@ -207,11 +203,11 @@ public class Platformer : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Spike"))
         {
-            Manager.Player.RespawnAtCheckPoint();
+            /* Manager.Player.RespawnAtCheckPoint(); */
+            Death();
         }
         else if (collision.gameObject.CompareTag("Enemy"))
         {
-            Debug.Log("OUCH");
             StartCoroutine(Hurt(collision.gameObject.transform));
         }
     }
@@ -219,6 +215,23 @@ public class Platformer : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawRay(transform.position, Vector2.down * jumpReset);
+    }
+
+    private void Death()
+    {
+        _body.velocity = Vector2.zero;
+        _body.angularVelocity = 0.0f;
+        SetStatic(false);
+        GameObject effect = Instantiate(_deathParticles, transform.position, Quaternion.identity);
+        Manager.Player.Invoke("RespawnAtCheckPoint", 1);
+    }
+
+    public void SetStatic(bool isStattic)
+    {
+        handleKeyInput = isStattic;
+        _body.gravityScale = isStattic ? 0.0f : 1.0f;
+        _box.enabled = isStattic;
+
     }
 
 }

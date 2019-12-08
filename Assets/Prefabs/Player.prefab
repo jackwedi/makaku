@@ -236,5 +236,10 @@ MonoBehaviour:
   jumpReset: 0.6
   dashLength: 20
   dashingDelay: 2
-  particles: {fileID: 8656096051885593794, guid: 091adb4ccedb3b5428273a051770475a,
+  megaJumpRatio: 1.5
+  isGrounded: 0
+  isGripping: 0
+  _dashParticles: {fileID: 8656096051885593794, guid: 372cf5bcc04a51d468dc82e30c95baf8,
+    type: 3}
+  _deathParticles: {fileID: 8656096051885593794, guid: 091adb4ccedb3b5428273a051770475a,
     type: 3}

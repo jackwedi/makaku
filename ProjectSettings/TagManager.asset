@@ -13,6 +13,7 @@ TagManager:
   - Mega Jumps
   - Enemy
   - Enemy Limits
+  - Baby Limits
   layers:
   - Default
   - TransparentFX
@@ -33,7 +34,7 @@ TagManager:
   - Enemy
   - Enemy Limits
   - Spikes
-  - 
+  - Baby Limits
   - 
   - 
   - 
@@ -56,12 +57,12 @@ TagManager:
   - name: Terrain
     uniqueID: 1322085245
     locked: 0
-  - name: CheckPoints
-    uniqueID: 2387611285
-    locked: 0
   - name: Jumps
     uniqueID: 3937584489
     locked: 0
   - name: Player
     uniqueID: 4428425
+    locked: 0
+  - name: CheckPoints
+    uniqueID: 2387611285
     locked: 0

@@ -17,6 +17,7 @@ public class PlayerManager : MonoBehaviour, IGameManager
     {
         // ADD ANIM
         _player.transform.position = Manager.Progress.GetCheckPoint();
+        _player.GetComponent<Platformer>().SetStatic(true);
     }
 
     public void SetPlayer(GameObject player)
