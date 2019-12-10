@@ -77,20 +77,20 @@ public class Platformer : MonoBehaviour
             _body.gravityScale = 1;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGripping)
+        if (Input.GetKeyDown(KeyCode.Space) && isGripping && handleKeyInput)
         {
             StartCoroutine(WallJump());
         }
 
 
         //Input of jumping handling 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && handleKeyInput)
         {
             _body.velocity = Vector2.up * jumpForce;
         }
 
         // Input of dashing handling
-        if (Input.GetKeyDown(KeyCode.W) && !isDashing && dashingAvailable)
+        if (Input.GetKeyDown(KeyCode.W) && !isDashing && dashingAvailable && handleKeyInput)
         {
             StartCoroutine(Dash());
         }
@@ -219,9 +219,10 @@ public class Platformer : MonoBehaviour
 
     private void Death()
     {
+        SetStatic(false);
+        _anim.SetTrigger("dead");
         _body.velocity = Vector2.zero;
         _body.angularVelocity = 0.0f;
-        SetStatic(false);
         GameObject effect = Instantiate(_deathParticles, transform.position, Quaternion.identity);
         Manager.Player.Invoke("RespawnAtCheckPoint", 1);
     }
@@ -229,9 +230,14 @@ public class Platformer : MonoBehaviour
     public void SetStatic(bool isStattic)
     {
         handleKeyInput = isStattic;
-        _body.gravityScale = isStattic ? 0.0f : 1.0f;
+        _body.bodyType = isStattic ? RigidbodyType2D.Dynamic : RigidbodyType2D.Static;
         _box.enabled = isStattic;
 
+    }
+
+    public void resetAnim()
+    {
+        _anim.SetTrigger("revive");
     }
 
 }

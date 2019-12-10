@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 
 public class PlayerManager : MonoBehaviour, IGameManager
@@ -17,7 +18,8 @@ public class PlayerManager : MonoBehaviour, IGameManager
     {
         // ADD ANIM
         _player.transform.position = Manager.Progress.GetCheckPoint();
-        _player.GetComponent<Platformer>().SetStatic(true);
+        _player.GetComponent<Platformer>().resetAnim();
+        StartCoroutine("test");
     }
 
     public void SetPlayer(GameObject player)
@@ -25,4 +27,11 @@ public class PlayerManager : MonoBehaviour, IGameManager
         this._player = player;
     }
 
+    public IEnumerator test()
+    {
+        yield return new WaitForSeconds(1);
+        _player.GetComponent<Platformer>().SetStatic(true);
+    }
+
 }
+

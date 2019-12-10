@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 8656096051885593793}
   - component: {fileID: 46454548038910877}
   m_Layer: 0
-  m_Name: Dash Paticles
+  m_Name: Death Particles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -116,7 +116,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.77
+      scalar: 1.01
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.990566, g: 0.35978103, b: 0.35978103, a: 1}
+      maxColor: {r: 0.8392157, g: 0.8777521, b: 0.98039216, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -601,7 +601,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     randomizeRotationDirection: 0
-    maxNumParticles: 20
+    maxNumParticles: 30
     size3D: 0
     rotation3D: 0
     gravityModifier:
@@ -866,7 +866,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 100
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -976,7 +976,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 8
+        scalar: 10
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -4823,4 +4823,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c50ae45fee86fc41b28b5ae75c76649, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deathTimer: 2
+  deathTimer: 10
