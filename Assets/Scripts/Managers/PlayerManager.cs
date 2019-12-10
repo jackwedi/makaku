@@ -8,6 +8,8 @@ public class PlayerManager : MonoBehaviour, IGameManager
     [SerializeField] private GameObject _player;
     private Vector3 startingPosition;
 
+    private bool _alive = true;
+
     public void Startup()
     {
         status = ManagerStatus.Initialized;
@@ -19,7 +21,7 @@ public class PlayerManager : MonoBehaviour, IGameManager
         // ADD ANIM
         _player.transform.position = Manager.Progress.GetCheckPoint();
         _player.GetComponent<Platformer>().resetAnim();
-        StartCoroutine("test");
+        StartCoroutine("DelayedInputs");
     }
 
     public void SetPlayer(GameObject player)
@@ -27,10 +29,21 @@ public class PlayerManager : MonoBehaviour, IGameManager
         this._player = player;
     }
 
-    public IEnumerator test()
+    public IEnumerator DelayedInputs()
     {
-        yield return new WaitForSeconds(1);
-        _player.GetComponent<Platformer>().SetStatic(true);
+        yield return new WaitForSeconds(0.5f);
+        _player.GetComponent<Platformer>().SetStatic(false);
+        this._alive = true;
+    }
+
+    public void setAlive(bool alive)
+    {
+        this._alive = alive;
+    }
+
+    public bool getAlive()
+    {
+        return this._alive;
     }
 
 }

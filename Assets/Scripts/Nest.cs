@@ -25,7 +25,5 @@ public class Nest : MonoBehaviour
         {
             Manager.Progress.NextSeason();
         }
-
-        Debug.Log("NEST " + other.tag + " " + other.name);
     }
 }

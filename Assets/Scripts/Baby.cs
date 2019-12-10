@@ -17,7 +17,7 @@ public class Baby : MonoBehaviour
     [SerializeField] private float _calmSpeedRatio = 0.5f;
     private float direction = -1;
     private int layerMask;
-
+    private Vector3 _initPosition;
 
     public enum BabyLayers
     {
@@ -35,6 +35,7 @@ public class Baby : MonoBehaviour
     {
         this._collider = this.gameObject.GetComponent<CapsuleCollider2D>();
         this._npc = this.gameObject.GetComponent<WanderingNPC>();
+        this._initPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
         switch (_layerType)
         {
@@ -48,17 +49,14 @@ public class Baby : MonoBehaviour
         }
 
         layerMask = (1 << LayerMask.NameToLayer("Player")) | (1 << LayerMask.NameToLayer("Baby Limits"));
+        Messenger.AddListener(GameEvent.DEATH, OnDeath);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (!this._secured && !this._captured && collision.gameObject.CompareTag("Player"))
         {
-            _captured = true;
-            this.GetComponent<WanderingNPC>().setWandering(false);
-            this._collider.isTrigger = true;
-            this._npc.setAnimBool("captured", true);
-
+            this.setCaptured(true);
             player = collision.gameObject;
         }
     }
@@ -101,5 +99,21 @@ public class Baby : MonoBehaviour
 
         this._npc.setAnimBool("captured", false);
     }
+
+    private void OnDeath()
+    {
+        Debug.Log("HER");
+        this.setCaptured(false);
+        this.transform.position = this._initPosition;
+    }
+
+    private void setCaptured(bool captured)
+    {
+        _captured = captured;
+        this.GetComponent<WanderingNPC>().setWandering(!captured);
+        this._collider.isTrigger = captured;
+        this._npc.setAnimBool("captured", captured);
+    }
+
 
 }

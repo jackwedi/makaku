@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InventoryManager : MonoBehaviour,IGameManager
+public class InventoryManager : MonoBehaviour, IGameManager
 {
     public ManagerStatus status { get; private set; }
 
@@ -20,6 +20,5 @@ public class InventoryManager : MonoBehaviour,IGameManager
     public void ItemCollected()
     {
         _collectibleCount += 1;
-        Debug.Log("COUT : " + _collectibleCount);
     }
 }

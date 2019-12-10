@@ -78,7 +78,6 @@ public class WanderingEnemy : MonoBehaviour
         hit = Physics2D.Raycast(transform.position, Vector2.up, .5f, layerMask);
         if (hit && hit.collider.CompareTag("Player"))
         {
-            Debug.Log(hit.collider.name);
             Hurt();
         }
 

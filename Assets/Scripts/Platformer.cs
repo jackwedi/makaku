@@ -189,7 +189,6 @@ public class Platformer : MonoBehaviour
         }
         else if (collision.CompareTag("Check Point"))
         {
-            Debug.Log("NEW CHECK POINT");
             Manager.Progress.SetCheckPoint(collision.gameObject.transform);
         }
         else if (collision.CompareTag("Mega Jumps"))
@@ -203,7 +202,6 @@ public class Platformer : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Spike"))
         {
-            /* Manager.Player.RespawnAtCheckPoint(); */
             Death();
         }
         else if (collision.gameObject.CompareTag("Enemy"))
@@ -219,19 +217,24 @@ public class Platformer : MonoBehaviour
 
     private void Death()
     {
-        SetStatic(false);
+        if (!Manager.Player.getAlive()) return;
+        Messenger.Broadcast(GameEvent.DEATH);
+
+        Manager.Player.setAlive(false);
+        SetStatic(true);
+
+        _anim.SetFloat("speed", 0.0f);
         _anim.SetTrigger("dead");
-        _body.velocity = Vector2.zero;
-        _body.angularVelocity = 0.0f;
+
         GameObject effect = Instantiate(_deathParticles, transform.position, Quaternion.identity);
         Manager.Player.Invoke("RespawnAtCheckPoint", 1);
     }
 
     public void SetStatic(bool isStattic)
     {
-        handleKeyInput = isStattic;
-        _body.bodyType = isStattic ? RigidbodyType2D.Dynamic : RigidbodyType2D.Static;
-        _box.enabled = isStattic;
+        handleKeyInput = !isStattic;
+        _body.bodyType = isStattic ? RigidbodyType2D.Static : RigidbodyType2D.Dynamic;
+        _box.enabled = !isStattic;
 
     }
 

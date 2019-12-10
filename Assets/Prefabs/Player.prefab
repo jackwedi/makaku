@@ -241,5 +241,5 @@ MonoBehaviour:
   isGripping: 0
   _dashParticles: {fileID: 8656096051885593794, guid: 372cf5bcc04a51d468dc82e30c95baf8,
     type: 3}
-  _deathParticles: {fileID: 8656096051885593794, guid: 091adb4ccedb3b5428273a051770475a,
+  _deathParticles: {fileID: 8656096051885593794, guid: e9368c9785b89734c955c22471be4ccc,
     type: 3}

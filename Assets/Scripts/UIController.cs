@@ -33,7 +33,6 @@ public class UIController : MonoBehaviour
     private void OnDeath()
     {
         // Create another animation on Death and set up the menu to either restart or quit
-        Manager.Progress.RestartLevel();
     }
 
     private void Update()
