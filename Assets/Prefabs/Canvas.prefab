@@ -112,16 +112,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dash UI
       objectReference: {fileID: 0}
-    - target: {fileID: 2461909795014467395, guid: b09d570e06f402f4b8526e45f67b29d3,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2461909795014467395, guid: b09d570e06f402f4b8526e45f67b29d3,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2461909796166860635, guid: b09d570e06f402f4b8526e45f67b29d3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -226,6 +216,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461909795014467395, guid: b09d570e06f402f4b8526e45f67b29d3,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2461909795014467395, guid: b09d570e06f402f4b8526e45f67b29d3,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b09d570e06f402f4b8526e45f67b29d3, type: 3}
