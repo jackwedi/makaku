@@ -37,12 +37,10 @@ public class Manager : MonoBehaviour
 
         if (Manager.instance == null)
         {
-            Debug.Log("NO");
             Manager.instance = this;
         }
         else
         {
-            Debug.Log("YES");
             Messenger.Broadcast(GameEvent.MANAGERS_READY);
             Object.Destroy(gameObject);
         }
