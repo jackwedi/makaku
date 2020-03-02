@@ -7,17 +7,25 @@ public class UIController : MonoBehaviour
 {
     [SerializeField] private Slider dashUI = null;
     [SerializeField] private GameObject loadingPanel = null;
+    private bool init = false;
 
     void Start()
     {
         Messenger<float, float>.AddListener(GameEvent.DASH_DELAY_UPDATED, OnDashDelayUpdated);
         Messenger.AddListener(GameEvent.DEATH, OnDeath);
+        init = true;
+        Debug.Log("START IT");
+
     }
 
     private void OnDestroy()
     {
-        Messenger<float, float>.RemoveListener(GameEvent.DASH_DELAY_UPDATED, OnDashDelayUpdated);
-        Messenger.RemoveListener(GameEvent.DEATH, OnDeath);
+        Debug.Log("DELETING IT");
+        // SAFEGUARD OnDestroy is called before onStart
+        if (init) {
+            Messenger<float, float>.RemoveListener(GameEvent.DASH_DELAY_UPDATED, OnDashDelayUpdated);
+            Messenger.RemoveListener(GameEvent.DEATH, OnDeath);
+        }
     }
 
     private void OnDashDelayUpdated(float currentTime, float timeToWait)

@@ -54,6 +54,7 @@ public class Jump : MonoBehaviour
     private void enable()
     {
         _collider.enabled = true;
+        _animator.enabled = true;
         _renderer.sprite = _jumpON;
         state = 0;
     }

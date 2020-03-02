@@ -30,8 +30,8 @@ public class Platformer : MonoBehaviour
 
     private void Start()
     {
-        /* Manager.Player.SetPlayer(this.gameObject); */
-        /* Manager.Progress.SetCheckPoint(this.transform); */
+        Manager.Player.SetPlayer(this.gameObject);
+        Manager.Progress.SetCheckPoint(this.transform);
 
         _body = GetComponent<Rigidbody2D>();
         _anim = GetComponent<Animator>();

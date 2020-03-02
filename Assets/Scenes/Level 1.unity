@@ -869,6 +869,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Controller
       objectReference: {fileID: 0}
+    - target: {fileID: 9208843121358699160, guid: 8d936d069d524cc44b2531cb4ff30e95,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9208843121358699161, guid: 8d936d069d524cc44b2531cb4ff30e95,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -934,6 +939,11 @@ PrefabInstance:
       propertyPath: loadingPanel
       value: 
       objectReference: {fileID: 859773411}
+    - target: {fileID: 9208843121358699158, guid: 8d936d069d524cc44b2531cb4ff30e95,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d936d069d524cc44b2531cb4ff30e95, type: 3}
 --- !u!1001 &437664915
@@ -39149,11 +39159,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 1.5
       objectReference: {fileID: 0}
-    - target: {fileID: 3411541696132375001, guid: caca0c57ec3b81c4f96c608319f36998,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 3411541696132374998, guid: caca0c57ec3b81c4f96c608319f36998,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -39163,6 +39168,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411541696132375001, guid: caca0c57ec3b81c4f96c608319f36998,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7319255093355308540, guid: caca0c57ec3b81c4f96c608319f36998,
         type: 3}
