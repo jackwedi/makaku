@@ -26,7 +26,7 @@ public class ProgressManager : MonoBehaviour, IGameManager
     {
         if (SceneManager.GetActiveScene().name != "Main Menu") currentLevel += 1;
         string nextLevel = "Level " + currentLevel.ToString();
-        SceneManager.LoadScene(nextLevel);
+        SceneManager.LoadScene("Main Menu");
     }
 
     public void RestartLevel()

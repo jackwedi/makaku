@@ -30,7 +30,6 @@ public class Platformer : MonoBehaviour
 
     private void Start()
     {
-        Manager.Player.SetPlayer(this.gameObject);
         Manager.Progress.SetCheckPoint(this.transform);
 
         _body = GetComponent<Rigidbody2D>();
@@ -39,6 +38,7 @@ public class Platformer : MonoBehaviour
 
         layerMaskGrounded = (1 << LayerMask.NameToLayer("Terrain")) | (1 << LayerMask.NameToLayer("Platform"));
         layerMaskGripping = (1 << LayerMask.NameToLayer("Terrain"));
+        Manager.Player.SetPlayer(this.gameObject);
 
     }
 

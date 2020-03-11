@@ -41,9 +41,9 @@ public class Manager : MonoBehaviour
         }
         else
         {
-            Messenger.Broadcast(GameEvent.MANAGERS_READY);
             Object.Destroy(gameObject);
         }
+
     }
 
     private IEnumerator StartupManagers()

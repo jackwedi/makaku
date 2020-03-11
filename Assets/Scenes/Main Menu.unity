@@ -212,6 +212,16 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5477912515452892959, guid: 07f8e0c3a66b78a44aad91191900c264,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 5477912515452892959, guid: 07f8e0c3a66b78a44aad91191900c264,
+        type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5477912514599866964, guid: 07f8e0c3a66b78a44aad91191900c264,
         type: 3}
       propertyPath: field of view
@@ -236,16 +246,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_BackGroundColor.a
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5477912515452892959, guid: 07f8e0c3a66b78a44aad91191900c264,
-        type: 3}
-      propertyPath: m_TagString
-      value: Untagged
-      objectReference: {fileID: 0}
-    - target: {fileID: 5477912515452892959, guid: 07f8e0c3a66b78a44aad91191900c264,
-        type: 3}
-      propertyPath: m_Layer
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 07f8e0c3a66b78a44aad91191900c264, type: 3}
@@ -380,8 +380,6 @@ MonoBehaviour:
   - {fileID: 1487155396}
   - {fileID: 1725728496}
   - {fileID: 2127311285}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

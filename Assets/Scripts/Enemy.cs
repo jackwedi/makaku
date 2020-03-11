@@ -123,7 +123,7 @@ public class Enemy : MonoBehaviour
         if (hurtable)
         {
             // ADD Animation
-            //Messenger.Broadcast(GameEvent.ENEMY_KILLED);
+            Messenger.Broadcast(GameEvent.ENEMY_KILLED);
             Destroy(gameObject);
         }
     }

@@ -23,7 +23,7 @@ public class Nest : MonoBehaviour
 
         if (this._rescuedBaby.Count == _babies.Length)
         {
-            Manager.Progress.NextSeason();
+            //Manager.Progress.NextSeason();
         }
     }
 }
