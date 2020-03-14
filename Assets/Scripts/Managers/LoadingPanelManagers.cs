@@ -15,6 +15,7 @@ public class LoadingPanelManagers : MonoBehaviour
 
     public void OnManagersReady()
     {
-        gameObject.SetActive(false);
+        /* gameObject.SetActive(false); */
+        SceneManager.LoadScene("Main Menu");
     }
 }
