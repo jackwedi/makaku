@@ -86,7 +86,7 @@ public class WanderingNPC : MonoBehaviour
         if (!this._wandering) return;
 
         // Speed movement
-        float deltaX = direction * speed * Time.deltaTime;
+        float deltaX = direction * speed * Time.fixedDeltaTime;
         Vector2 movement = new Vector2(deltaX, _body.velocity.y);
         _body.velocity = movement;
         _anim.SetFloat("speed", Mathf.Abs(deltaX));

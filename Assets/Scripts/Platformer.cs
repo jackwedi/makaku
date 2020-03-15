@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Platformer : MonoBehaviour
 {
-    [SerializeField] private float speed = .0005f;
+    [SerializeField] private float speed = 100f;
     [SerializeField] private float jumpForce = 12.0f;
     [SerializeField] private float jumpReset = 10f;
 
@@ -49,7 +49,7 @@ public class Platformer : MonoBehaviour
         if (handleKeyInput)
         {
             // Speed movement
-            deltaX = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+            deltaX = Input.GetAxis("Horizontal") * speed * Time.fixedDeltaTime;
             Vector2 movement = new Vector2(deltaX, _body.velocity.y);
             _body.velocity = movement;
             _anim.SetFloat("speed", Mathf.Abs(deltaX));

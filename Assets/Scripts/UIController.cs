@@ -14,13 +14,10 @@ public class UIController : MonoBehaviour
         Messenger<float, float>.AddListener(GameEvent.DASH_DELAY_UPDATED, OnDashDelayUpdated);
         Messenger.AddListener(GameEvent.DEATH, OnDeath);
         init = true;
-        Debug.Log("START IT");
-
     }
 
     private void OnDestroy()
     {
-        Debug.Log("DELETING IT");
         // SAFEGUARD OnDestroy is called before onStart
         if (init) {
             Messenger<float, float>.RemoveListener(GameEvent.DASH_DELAY_UPDATED, OnDashDelayUpdated);

@@ -16,8 +16,6 @@ public class LevelUIGenerator : MonoBehaviour
         for (int i = 0; i < Manager.Progress.getLevel(); i++)
         {
             string level = (i + 1).ToString();
-            Debug.Log(level);
-
             _buttons[i].gameObject.SetActive(true);
             _buttons[i].GetComponentInChildren<UnityEngine.UI.Text>().text = level;
             _buttons[i].onClick.AddListener(() => SceneManager.LoadScene("Level " + level));
