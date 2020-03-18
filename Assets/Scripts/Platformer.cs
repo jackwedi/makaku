@@ -146,16 +146,16 @@ public class Platformer : MonoBehaviour
     {
 
         float time = 0;
-        Messenger<float, float>.Broadcast(GameEvent.DASH_DELAY_UPDATED, time, dashingDelay);
+        Messenger<float, float>.Broadcast(GameEvent.DASH_DELAY_UPDATED.ToString(), time, dashingDelay);
 
         while (time < dashingDelay)
         {
             yield return new WaitForSeconds(1);
             time += 1;
-            Messenger<float, float>.Broadcast(GameEvent.DASH_DELAY_UPDATED, time, dashingDelay);
+            Messenger<float, float>.Broadcast(GameEvent.DASH_DELAY_UPDATED.ToString(), time, dashingDelay);
         }
 
-        Messenger<float, float>.Broadcast(GameEvent.DASH_DELAY_UPDATED, time, dashingDelay);
+        Messenger<float, float>.Broadcast(GameEvent.DASH_DELAY_UPDATED.ToString(), time, dashingDelay);
         dashingAvailable = true;
     }
 
@@ -218,7 +218,7 @@ public class Platformer : MonoBehaviour
     private void Death()
     {
         if (!Manager.Player.getAlive()) return;
-        Messenger.Broadcast(GameEvent.DEATH);
+        Messenger.Broadcast(GameEvent.DEATH.ToString());
 
         Manager.Player.setAlive(false);
         SetStatic(true);

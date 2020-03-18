@@ -70,6 +70,6 @@ public class Manager : MonoBehaviour
             }
             yield return null;
         }
-        Messenger.Broadcast(GameEvent.MANAGERS_READY);
+        Messenger.Broadcast(GameEvent.MANAGERS_READY.ToString());
     }
 }

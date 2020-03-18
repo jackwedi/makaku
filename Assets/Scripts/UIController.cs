@@ -11,8 +11,8 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
-        Messenger<float, float>.AddListener(GameEvent.DASH_DELAY_UPDATED, OnDashDelayUpdated);
-        Messenger.AddListener(GameEvent.DEATH, OnDeath);
+        Messenger<float, float>.AddListener(GameEvent.DASH_DELAY_UPDATED.ToString(), OnDashDelayUpdated);
+        Messenger.AddListener(GameEvent.DEATH.ToString(), OnDeath);
         init = true;
     }
 
@@ -20,8 +20,8 @@ public class UIController : MonoBehaviour
     {
         // SAFEGUARD OnDestroy is called before onStart
         if (init) {
-            Messenger<float, float>.RemoveListener(GameEvent.DASH_DELAY_UPDATED, OnDashDelayUpdated);
-            Messenger.RemoveListener(GameEvent.DEATH, OnDeath);
+            Messenger<float, float>.RemoveListener(GameEvent.DASH_DELAY_UPDATED.ToString(), OnDashDelayUpdated);
+            Messenger.RemoveListener(GameEvent.DEATH.ToString(), OnDeath);
         }
     }
 

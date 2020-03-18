@@ -134,7 +134,7 @@ public class WanderingEnemy : MonoBehaviour
         if (hurtable)
         {
             // ADD Animation
-            Messenger.Broadcast(GameEvent.ENEMY_KILLED);
+            Messenger.Broadcast(GameEvent.ENEMY_KILLED.ToString());
             Destroy(gameObject);
         }
     }

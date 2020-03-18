@@ -5,12 +5,12 @@ public class LoadingPanelManagers : MonoBehaviour
 {
     private void Awake()
     {
-        Messenger.AddListener(GameEvent.MANAGERS_READY, OnManagersReady);
+        Messenger.AddListener(GameEvent.MANAGERS_READY.ToString(), OnManagersReady);
     }
 
     private void OnDestroy()
     {
-        Messenger.RemoveListener(GameEvent.MANAGERS_READY, OnManagersReady);
+        Messenger.RemoveListener(GameEvent.MANAGERS_READY.ToString(), OnManagersReady);
     }
 
     public void OnManagersReady()

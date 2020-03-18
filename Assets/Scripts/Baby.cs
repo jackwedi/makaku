@@ -49,7 +49,7 @@ public class Baby : MonoBehaviour
         }
 
         layerMask = (1 << LayerMask.NameToLayer("Player")) | (1 << LayerMask.NameToLayer("Baby Limits"));
-        Messenger.AddListener(GameEvent.DEATH, OnDeath);
+        Messenger.AddListener(GameEvent.DEATH.ToString(), OnDeath);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
