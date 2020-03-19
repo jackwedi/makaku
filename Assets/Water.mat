@@ -37,10 +37,10 @@ Material:
     - Vector1_1DA8161B: 0
     - Vector1_DDA94664: 1
     - _EnableExternalAlpha: 0
-    - _SinAmp: 1
+    - _SinAmp: -0.26
     - _SinLength: 0.3
-    - _SinSpeed: 0.2
+    - _SinSpeed: 0.1
     m_Colors:
-    - _Color: {r: 0.46168566, g: 0.7830189, b: 0.7379974, a: 0.63529414}
+    - _Color: {r: 0.46168566, g: 0.7830189, b: 0.7379974, a: 0.8352941}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}

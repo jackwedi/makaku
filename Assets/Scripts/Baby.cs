@@ -102,7 +102,6 @@ public class Baby : MonoBehaviour
 
     private void OnDeath()
     {
-        Debug.Log("HER");
         this.setCaptured(false);
         this.transform.position = this._initPosition;
     }

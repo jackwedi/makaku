@@ -119,10 +119,10 @@ public class WanderingNPC : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
-        if (collision.CompareTag("Jumps"))
+/*         if (collision.CompareTag("Jumps"))
         {
             _body.velocity = Vector2.up * jumpForce * 1.5f;
-        }
+        } */
     }
 
 
