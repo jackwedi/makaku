@@ -22,8 +22,9 @@ public class Baby : MonoBehaviour
     public enum BabyLayers
     {
         Baby1,
-        Baby2
-
+        Baby2,
+        Baby3,
+        Baby4
     }
 
     public bool getIsCaptured()
@@ -47,6 +48,9 @@ public class Baby : MonoBehaviour
                 this._layer = "Baby 2";
                 break;
         }
+
+        this._layer = LayerMask.LayerToName(this.gameObject.layer);
+        Debug.Log(_layerType + " : " + this._layer);
 
         layerMask = (1 << LayerMask.NameToLayer("Player")) | (1 << LayerMask.NameToLayer("Baby Limits"));
         Messenger.AddListener(GameEvent.DEATH.ToString(), OnDeath);
