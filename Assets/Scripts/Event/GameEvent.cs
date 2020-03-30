@@ -12,5 +12,6 @@ using UnityEngine;
     LEVEL_READY,
     ENEMY_KILLED,
     REVIVE,
-    HOT_SPRINGS_FOUND
+    HOT_SPRINGS_FOUND,
+    BABY_SAVED
 }

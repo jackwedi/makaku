@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 public class Objective : MonoBehaviour
 {
     // Start is called before the first frame update
-    private int _objectiveCount = 0;
+    [SerializeField] private int _objectiveCount = 0;
     void Start()
     {
         switch (SceneManager.GetActiveScene().name) {
@@ -16,19 +16,28 @@ public class Objective : MonoBehaviour
             case "Level 6":
                 Messenger.AddListener(GameEvent.HOT_SPRINGS_FOUND.ToString(), onHotSpringsFound);
                 break;
+            case "Level 3":
+            case "Level 4":
+                Messenger.AddListener(GameEvent.BABY_SAVED.ToString(), onBabySaved);
+                break;
         }
 
     }
-    void onEnemyKilled() {
+    private void onEnemyKilled() {
         _objectiveCount--;
         if (_objectiveCount == 0) Manager.Progress.NextSeason();
     }
 
-    public void onHotSpringsFound() {
+    private void onHotSpringsFound() {
         Manager.Progress.NextSeason();
     }
 
-        private void OnDestroy()
+    private void onBabySaved() {
+        _objectiveCount--;
+        if (_objectiveCount == 0) Manager.Progress.NextSeason();
+    }
+
+    private void OnDestroy()
     {
         switch (SceneManager.GetActiveScene().name) {
             case "Level 1":
@@ -38,6 +47,10 @@ public class Objective : MonoBehaviour
             case "Level 2":
             case "Level 6":
                 Messenger.RemoveListener(GameEvent.HOT_SPRINGS_FOUND.ToString(), onHotSpringsFound);
+                break;
+            case "Level 3":
+            case "Level 4":
+                Messenger.RemoveListener(GameEvent.BABY_SAVED.ToString(), onBabySaved);
                 break;
 
         }

@@ -19,11 +19,7 @@ public class Nest : MonoBehaviour
         {
             this._rescuedBaby.Add(other.gameObject);
             other.gameObject.GetComponent<Baby>().setSecured();
-        }
-
-        if (this._rescuedBaby.Count == _babies.Length)
-        {
-            //Manager.Progress.NextSeason();
+            Messenger.Broadcast(GameEvent.BABY_SAVED.ToString());
         }
     }
 }

@@ -38,19 +38,7 @@ public class Baby : MonoBehaviour
         this._npc = this.gameObject.GetComponent<WanderingNPC>();
         this._initPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
 
-        switch (_layerType)
-        {
-
-            case BabyLayers.Baby1:
-                this._layer = "Baby";
-                break;
-            case BabyLayers.Baby2:
-                this._layer = "Baby 2";
-                break;
-        }
-
         this._layer = LayerMask.LayerToName(this.gameObject.layer);
-        Debug.Log(_layerType + " : " + this._layer);
 
         layerMask = (1 << LayerMask.NameToLayer("Player")) | (1 << LayerMask.NameToLayer("Baby Limits"));
         Messenger.AddListener(GameEvent.DEATH.ToString(), OnDeath);
