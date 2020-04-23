@@ -17,8 +17,12 @@ public class Objective : MonoBehaviour
                 Messenger.AddListener(GameEvent.HOT_SPRINGS_FOUND.ToString(), onHotSpringsFound);
                 break;
             case "Level 3":
-            case "Level 4":
+            case "Level 7":
                 Messenger.AddListener(GameEvent.BABY_SAVED.ToString(), onBabySaved);
+                break;
+            case "Level 4":
+            case "Level 8":
+                Messenger.AddListener(GameEvent.FRUIT_COLLECTED.ToString(), onFruitCollected);
                 break;
         }
 
@@ -37,6 +41,11 @@ public class Objective : MonoBehaviour
         if (_objectiveCount == 0) Manager.Progress.NextSeason();
     }
 
+    private void onFruitCollected() {
+        _objectiveCount--;
+        if (_objectiveCount == 0) Manager.Progress.NextSeason();
+    }
+
     private void OnDestroy()
     {
         switch (SceneManager.GetActiveScene().name) {
@@ -49,8 +58,12 @@ public class Objective : MonoBehaviour
                 Messenger.RemoveListener(GameEvent.HOT_SPRINGS_FOUND.ToString(), onHotSpringsFound);
                 break;
             case "Level 3":
-            case "Level 4":
+            case "Level 7":
                 Messenger.RemoveListener(GameEvent.BABY_SAVED.ToString(), onBabySaved);
+                break;
+            case "Level 4":
+            case "Level 8":
+                Messenger.RemoveListener(GameEvent.FRUIT_COLLECTED.ToString(), onBabySaved);
                 break;
 
         }
