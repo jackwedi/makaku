@@ -27,6 +27,8 @@ public class Platformer : MonoBehaviour
     [SerializeField] private bool isGripping;
     [SerializeField] private GameObject _dashParticles = null;
     [SerializeField] private GameObject _deathParticles = null;
+    [SerializeField] private ParticleSystem _dustParticles = null;
+
 
     private void Start()
     {
@@ -56,13 +58,19 @@ public class Platformer : MonoBehaviour
         }
 
         // isGrounded handling
-        isGrounded = Physics2D.Raycast(transform.position, Vector2.down, jumpReset, layerMaskGrounded);
+        bool testGrounded = Physics2D.Raycast(transform.position, Vector2.down, jumpReset, layerMaskGrounded);
+        if (testGrounded == true && isGrounded == false) {
+            // Landing
+            _dustParticles.Play();
+        }
+        isGrounded = testGrounded;
         _anim.SetBool("grounded", isGrounded);
 
         // Flips the sprite depending on the sign of deltaX
         if (!Mathf.Approximately(deltaX, 0))
         {
             transform.localScale = new Vector3(Mathf.Sign(deltaX), 1, 1);
+            _dustParticles.transform.localScale = new Vector3(Mathf.Sign(deltaX), 1, 1);
         }
 
         isGripping = Physics2D.Raycast(transform.position, new Vector2(transform.localScale.x, transform.localScale.y), jumpReset / 2, layerMaskGripping) && !Physics2D.Raycast(transform.position, Vector2.down, jumpReset * 2, layerMaskGrounded);
@@ -82,10 +90,10 @@ public class Platformer : MonoBehaviour
             StartCoroutine(WallJump());
         }
 
-
         //Input of jumping handling 
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded && handleKeyInput)
         {
+            _dustParticles.Play();
             _body.velocity = Vector2.up * jumpForce;
         }
 
