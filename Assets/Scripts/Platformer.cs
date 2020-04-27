@@ -56,9 +56,8 @@ public class Platformer : MonoBehaviour
             _body.velocity = movement;
             _anim.SetFloat("speed", Mathf.Abs(deltaX));
         }
-
         // isGrounded handling
-        bool testGrounded = Physics2D.Raycast(transform.position, Vector2.down, jumpReset, layerMaskGrounded);
+        bool testGrounded = Physics2D.Raycast(transform.position, Vector2.down, jumpReset, layerMaskGrounded) && Mathf.Abs(_body.velocity.y) < 0.05f;
         if (testGrounded == true && isGrounded == false) {
             // Landing
             _dustParticles.Play();
